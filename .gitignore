@@ -1,0 +1,23 @@
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# JetBrains系（IntelliJ IDEAなど）
+.idea/
+
+# ログファイル
+*.log
+
+# 一時ファイル
+*.tmp
+*.temp
+
+# ビルド成果物（使用する場合）
+dist/
+build/
+
+# Node.jsを使う場合のみ
+node_modules/
+.env
