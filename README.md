@@ -1,4 +1,4 @@
-# Chrome Screen Recorder Extension
+# Chrome画面録画拡張機能
 
 ## 概要
 
