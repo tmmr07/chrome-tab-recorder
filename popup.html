@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { width: 220px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 12px; margin: 0; background: #f9f9f9; }
+    h3 { margin: 0 0 12px 0; font-size: 14px; color: #333; text-align: center; }
+    button { width: 100%; padding: 10px; margin: 4px 0; border: none; border-radius: 6px; font-weight: bold; font-size: 13px; cursor: pointer; transition: background 0.2s; }
+    #startBtn { background: #007AFF; color: white; }
+    #startBtn:hover { background: #0063cc; }
+    #stopBtn { background: #FF3B30; color: white; display: none; }
+    #stopBtn:hover { background: #d32f2f; }
+    #status { font-size: 11px; color: #666; text-align: center; margin-top: 8px; line-height: 1.4; }
+  </style>
+</head>
+<body>
+  <h3>Ultra HQ Recorder</h3>
+  <button id="startBtn">録画開始</button>
+  <button id="stopBtn">録画停止</button>
+  <div id="status">スタンバイ完了</div>
+  <script src="popup.js"></script>
+</body>
+</html>
