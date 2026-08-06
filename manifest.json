@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Ultra HQ Tab Recorder Pro",
+  "version": "1.0",
+  "description": "タブの内容を録画する拡張機能",
+  "permissions": [
+    "tabCapture",
+    "offscreen",
+    "tabs",
+    "storage",
+    "downloads"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}
