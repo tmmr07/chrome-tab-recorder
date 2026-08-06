@@ -21,7 +21,6 @@ startBtn.addEventListener('click', async () => {
 
     statusText.textContent = "録画するタブを選択してください...";
 
-    // 2. 画面共有プロンプト（60fps固定・解像度はネイティブ）
     const stream = await navigator.mediaDevices.getDisplayMedia({
       video: {
         frameRate: { ideal: 60, max: 60 }
@@ -38,14 +37,11 @@ startBtn.addEventListener('click', async () => {
       videoTrack.contentHint = 'detail';
     }
 
-    // 4. 【超重要：発熱対策】Macのハードウェアエンコーダを使える「h264」を指定
-    // VP9と比べてPCへの負荷（発熱）が劇的に下がります。
     const options = {
       mimeType: 'video/webm;codecs=h264',
-      videoBitsPerSecond: 15000000 // 15 Mbps（H.264ならこれで十分な高画質）
+      videoBitsPerSecond: 15000000 
     };
 
-    // h264が弾かれた場合は、VP9より圧倒的に軽い「VP8」へ逃がす
     if (!MediaRecorder.isTypeSupported(options.mimeType)) {
       console.warn('H.264がサポートされていないため、軽量なVP8を使用します。');
       options.mimeType = 'video/webm;codecs=vp8,opus';
@@ -67,7 +63,7 @@ startBtn.addEventListener('click', async () => {
       
       startBtn.style.display = 'block';
       stopBtn.style.display = 'none';
-      statusText.textContent = "録画を安全に終了し、保存を完了しました。";
+      statusText.textContent = "録画を終了し、保存を完了しました。";
     };
 
     stream.getVideoTracks()[0].onended = () => {
@@ -78,7 +74,7 @@ startBtn.addEventListener('click', async () => {
     
     startBtn.style.display = 'none';
     stopBtn.style.display = 'block';
-    statusText.textContent = "高画質(60fps/低負荷)で録画中... (直接書き込み中)";
+    statusText.textContent = "録画中...";
 
   } catch (err) {
     console.error("Error: ", err);
