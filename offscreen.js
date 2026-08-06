@@ -22,9 +22,6 @@ async function startTabCapture(streamId) {
     opfsFileHandle = await root.getFileHandle('temp_buffer.webm', { create: true });
     opfsWritable = await opfsFileHandle.createWritable();
 
-    // 【ここを修正】市販の拡張機能と同じ秘密のギミック
-    // 映像を1080p（フルHD）に制限してMacの負荷を4分の1に激減させます。
-    // ビットレートを高く保つため、サッカーの文字や映像の綺麗さは100%維持されます。
     const stream = await navigator.mediaDevices.getUserMedia({
       audio: {
         mandatory: { chromeMediaSource: 'tab', chromeMediaSourceId: streamId }
@@ -33,9 +30,9 @@ async function startTabCapture(streamId) {
         mandatory: {
           chromeMediaSource: 'tab',
           chromeMediaSourceId: streamId,
-          maxWidth: 1920,   // 横幅を1080p規格に制限
-          maxHeight: 1080,  // 縦幅を1080p規格に制限
-          maxFrameRate: 60  // 60fpsは絶対に死守
+          maxWidth: 1920,
+          maxHeight: 1080, 
+          maxFrameRate: 60
         }
       }
     });
@@ -49,7 +46,6 @@ async function startTabCapture(streamId) {
       videoTrack.contentHint = 'detail';
     }
 
-    // 1080p60fpsに対して「15Mbps」は超がつくほどの贅沢な高画質設定です
     const options = {
       mimeType: 'video/webm;codecs=h264',
       videoBitsPerSecond: 15000000 
@@ -86,7 +82,7 @@ async function startTabCapture(streamId) {
     };
 
     mediaRecorder.start(1000);
-    chrome.runtime.sendMessage({ target: 'popup', type: 'status-update', text: "特権モードで録画中...（裏作業OK）" });
+    chrome.runtime.sendMessage({ target: 'popup', type: 'status-update', text: "録画中...（別のタブで作業しても録画は続行されます）" });
 
   } catch (err) {
     chrome.runtime.sendMessage({ target: 'popup', type: 'status-update', text: "エラー: " + err.message });
